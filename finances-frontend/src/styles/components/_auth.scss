@@ -1,0 +1,14 @@
+.auth__main-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: $bg-dark;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth__container {
+    background-color: $bg-content;
+    height: auto !important;
+    border-radius: 22px;
+    padding: 16px;
+}

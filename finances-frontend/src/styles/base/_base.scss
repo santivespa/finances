@@ -1,0 +1,101 @@
+
+html, body {
+    //width: 100vw;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    background-color: $bg-dark;
+    
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.small {
+    font-size: 12px
+}
+
+/* Modal */
+.ReactModalPortal > div{
+    opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: opacity .2s ease-in-out;
+    z-index: 999;
+}
+
+.modal-fondo {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.modal {
+    background: white;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+    display: inline;
+    height: auto;
+    max-width: 400px;
+    outline: none;
+    padding: 16px;
+}
+
+.modal-lg {
+    background: white;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+    display: inline;
+    min-height: 326px;
+    max-width: 400px;
+    outline: none;
+    padding: 16px;
+}
+
+.btn-modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    div {
+        display: flex;
+    }
+}
+
+
+
+.mp-0 {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+h1 {
+    margin: 0px;
+}
+
+
+.white-text {
+    color: white;
+    font-weight: 500;
+
+    a {
+        color: darken($color: white, $amount: 30);
+        font-weight: 500;
+    }
+}

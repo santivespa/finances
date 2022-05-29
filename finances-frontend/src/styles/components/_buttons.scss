@@ -1,0 +1,48 @@
+
+.btn-small {
+    font-size: 12px;
+    width: 100%;
+}
+
+.btn-custom-link{
+    font-size: 12px;
+    line-height: 14px !important;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+}
+
+.btn-add-sheet {
+    height: 40px;
+    width: 40px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.btn-config-sheet {
+    height: 40px;
+    width: 40px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.btn-fake-link {
+  
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        font-weight: 500;
+        /*input has OS specific font-family*/
+        
+        text-decoration: underline;
+        cursor: pointer;
+      
+}
+

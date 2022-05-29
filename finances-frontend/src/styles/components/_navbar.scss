@@ -1,0 +1,16 @@
+
+.navbar__main-content {
+    display: flex;
+    padding: 16px;
+}
+
+
+.navbar__link {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+font-weight: 500;
+    &:hover {
+        color: darken($color: white, $amount: 20);
+    }
+}
