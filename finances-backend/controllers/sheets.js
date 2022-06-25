@@ -115,7 +115,7 @@ const deleteSheet = async (req, res) => {
             })
         }
 
-        await Sheet.findByIdAndDelete(sheetID, req.body);
+        await Sheet.findByIdAndDelete(sheetID);
 
         res.json({
             ok: true, 

@@ -128,11 +128,11 @@ const setSheetItems = (items) => ({
     payload: items
 });
 
-export const startAddItem = (item, sheetID) => {
+export const startAddItem = (item, sheetID, categoryID) => {
     return async (dispatch) => {
         dispatch(startLoading());
-
-        const res = await fetchWithToken(`sheet-item/add?sheetID=${sheetID}`, item, 'POST');
+        console.log(`Adding item with categoryID: ${categoryID}`);
+        const res = await fetchWithToken(`sheet-item/add?sheetID=${sheetID}&categoryID=${categoryID}`, item, 'POST');
         const body = await res.json();
         if(body.ok) {
             dispatch(addItem(body.item));

@@ -12,6 +12,9 @@ export const ItemsList = () => {
 
     const { active, activeItems } = useSelector(state => state.sheets);
 
+    const { categories } = useSelector(state => state.categories);
+
+
     useEffect(()=>{
         dispatch(sheetGetItems(active.id));
     }, []);
@@ -25,7 +28,7 @@ export const ItemsList = () => {
     return (
         <div className="sheet__sheet-items-list">
             
-            <NewSheetItem/>
+            <NewSheetItem categories={ categories } />
             <table className="table table-bordered table-hover cursor-pointer cursor-pointer">
                 <tbody>
                     {
@@ -36,12 +39,14 @@ export const ItemsList = () => {
                                 (
                                     <tr key={ item.id } onDoubleClick={ (e) => setActiveItem(item) } className="sheet__item-adjustment">
                                         <td>adjustment</td>
+                                        <td></td>
                                         <td className="text-end">{ item.amount }</td>
                                     </tr>
                                 ) : 
                                 (
                                     <tr key={ item.id } onDoubleClick={ (e) => setActiveItem(item) }>
                                         <td>{ item.description }</td>
+                                        <td>{ item.categoryName }</td>
                                         <td className="text-end">{ item.amount }</td>
                                     </tr>
                                 )
@@ -52,7 +57,7 @@ export const ItemsList = () => {
                 </tbody>
             </table>
 
-            <SheetItemModal />
+            <SheetItemModal categories={ categories }/>
         </div>
     )
 }

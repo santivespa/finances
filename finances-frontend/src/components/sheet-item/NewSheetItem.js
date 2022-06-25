@@ -1,15 +1,17 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { startGetCategories } from '../../actions/categories';
 import { startAddItem, startAddSheetItem } from '../../actions/sheets';
 import { useForm } from '../../hooks/useForm'
 
-export const NewSheetItem = () => {
+export const NewSheetItem = ({ categories }) => {
 
     const dispatch = useDispatch();
 
     const [descriptionValid, setDescriptionValid ] = useState(true);
     const [amountValid, setAmountValid ] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState();
 
     const { active } = useSelector(state => state.sheets);
     const { loading } = useSelector(state => state.ui);
@@ -22,6 +24,15 @@ export const NewSheetItem = () => {
 
     const { description, amount } = formValues;
 
+    useEffect(() => {
+        dispatch(startGetCategories());
+    }, []);
+
+    useEffect(() => {
+        if(categories?.length > 0) {
+            setSelectedCategory(categories[0].id);
+        }
+    }, [categories]);
 
     const validateAmount = ({ target }) => {
         const amount = target.value;
@@ -45,7 +56,6 @@ export const NewSheetItem = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
         if(description.trim().length === 0){
             setDescriptionValid(false);
             return;
@@ -60,10 +70,15 @@ export const NewSheetItem = () => {
             id: new Date().getTime(),
             description,
             amount
-        },  active.id));
+        },  active.id, selectedCategory));
         reset();
     }
 
+
+
+    const selectCategory = (e) => {
+        setSelectedCategory(e.target.value);
+    }
 
 
     return (
@@ -81,7 +96,7 @@ export const NewSheetItem = () => {
 
                         />
                     </div>
-                    <div className="col">
+                    <div className="col-3">
                         <input 
                             type="text" 
                             className={`form-control input-new-entry ${ !amountValid && 'is-invalid'}`}
@@ -94,13 +109,24 @@ export const NewSheetItem = () => {
                             invalid amount
                         </div>
                     </div>
-                    <div className="col" >
+                    <div className="col">
+                        <select className="form-select input-new-entry" value={selectedCategory} onChange={ (e) => { selectCategory(e); }}>
+                            {
+                                categories.map(x => (
+                                    <option key={x.id} value={x.id}>{x.name}</option>
+                                ))
+                            }
+                        </select>
+                     
+                      
+                    </div>
+                    <div className="col-2" >
                         <button 
                         type="submit" 
                         className="btn btn-dark btn-small"
                         disabled={ loading }
                         >
-                            new entry
+                            <i className="fa-regular fa-floppy-disk"></i>
                         </button>
                     </div>
                 </div>

@@ -55,7 +55,7 @@ export const Login = () => {
        
        
             <Link
-                to="/register"
+                to="/auth/register"
             >
                 Register
             </Link>

@@ -21,6 +21,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/sheets', require('./routes/sheets'));
 app.use('/api/sheet-item', require('./routes/sheet-item'));
+app.use('/api/category', require('./routes/category'));
 
 //Listen requests
 app.listen(process.env.PORT, () => {

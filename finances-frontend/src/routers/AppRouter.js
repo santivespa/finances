@@ -7,6 +7,7 @@ import { startChekingToken } from '../actions/auth';
 
 import { FinanceScreen } from '../components/finance/FinanceScreen';
 import { AuthRouter } from './AuthRouter';
+import { FinancesRouter } from './FinancesRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
@@ -27,13 +28,13 @@ export const AppRouter = () => {
     <BrowserRouter>
         <Routes>
 
-            <Route path="/" element={
+            <Route path="/*" element={
               <PrivateRoute isAuthenticated={!!id}>
-                <FinanceScreen />
+                <FinancesRouter />
               </PrivateRoute>
             } />
        
-            <Route path="/*" element={
+            <Route path="/auth/*" element={
               <PublicRoute isAuthenticated={!!id}>
                 <AuthRouter /> 
               </PublicRoute>

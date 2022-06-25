@@ -17,19 +17,19 @@ export const AuthRouter = () => {
         </Routes>
       </div>
 
-      <div class="text-center col-10 col-md-5 col-lg-4">
-          <p class="m-0 mt-2 white-text">
-              1.0.0    
+      <div className="text-center col-10 col-md-5 col-lg-4">
+          <p className="m-0 mt-2 white-text">
+              2.0.0    
           </p>
 
-          <p class="m-0 mt-2 white-text">
+          <p className="m-0 mt-2 white-text">
               <span>Developed by </span>
               <a href="https://www.linkedin.com/in/santiago-vespa-gutierrez-991bb518b/" target="_blank">
                    Santiago Vespa
               </a>
               
           </p>
-          <p class="m-0 white-text">
+          <p className="m-0 white-text">
               <span>Open source project: </span>
               <a href="https://github.com/santivespa/finances" target="_blank">
                   source code on GitHub.

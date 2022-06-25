@@ -5,8 +5,8 @@ const addItem = async (req, res) => {
 
     const item = new SheetItem(req.body);
     item.sheet = req.query.sheetID;
+    item.category = req.query.categoryID;
 
-    console.log(req.query.sheetID);
     try {
 
         const itemSaved = await item.save();
@@ -51,8 +51,8 @@ const updateItem = async (req, res) => {
                 msg: 'No authorized'
             })
         }
-
-        const itemUpdated = await SheetItem.findByIdAndUpdate(itemID, req.body, { new: true });
+        
+        const itemUpdated = await SheetItem.findByIdAndUpdate(itemID, req.body, { new: true }).populate("category");;
 
         res.json({
             ok: true,
@@ -129,7 +129,7 @@ const getItems = async (req, res) => {
         }
         
      
-       const items = await SheetItem.find({ sheet: sheetID });
+       const items = await SheetItem.find({ sheet: sheetID }).populate("category");
 
         res.json({
             ok: true,

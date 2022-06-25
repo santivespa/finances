@@ -8,46 +8,50 @@ import { useForm } from '../../hooks/useForm';
 
 const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
     },
 };
 
 Modal.setAppElement('#root');
 
-export const SheetItemModal = () => {
+export const SheetItemModal = ({ categories }) => {
 
     const dispatch = useDispatch();
 
     const { modalOpen, loading } = useSelector(state => state.ui);
     const { activeItem } = useSelector(state => state.sheets);
-    const [formValues, handleInputChange, reset ] = useForm({ description: activeItem?.description || '', amount:activeItem?.amount || '' });
+    const [selectedCategory, setSelectedCategory] = useState();
 
-    
+
+
+    const [formValues, handleInputChange, reset] = useForm({ description: activeItem?.description || '', amount: activeItem?.amount || '' });
+
+
     useEffect(() => {
-      if(activeItem) {
-        reset(activeItem);
-      }
+        if (activeItem) {
+            reset(activeItem);
+            setSelectedCategory(activeItem?.categoryID ? activeItem.categoryID : 0)
+        }
 
     }, [activeItem])
 
+    const [descriptionValid, setDescriptionValid] = useState(true);
+    const [amountValid, setAmountValid] = useState(true);
 
-    const [descriptionValid, setDescriptionValid ] = useState(true);
-    const [amountValid, setAmountValid ] = useState(true);
-    
     const { id, description, amount, type } = formValues;
 
 
     const validateAmount = ({ target }) => {
         const amount = target.value;
 
-        if(isNaN(amount)){
+        if (isNaN(amount)) {
             setAmountValid(false);
-        }else{
+        } else {
             setAmountValid(true);
         }
     }
@@ -55,7 +59,7 @@ export const SheetItemModal = () => {
     const validateDescription = ({ target }) => {
         const description = target.value;
 
-        if(description.trim().length !== 0){
+        if (description.trim().length !== 0) {
             setDescriptionValid(true);
         }
     }
@@ -70,16 +74,16 @@ export const SheetItemModal = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(description.trim().length === 0 && !type){
+        if (description.trim().length === 0 && !type) {
             setDescriptionValid(false);
             return;
         }
-        if(isNaN(amount) || !amount){
+        if (isNaN(amount) || !amount) {
             setAmountValid(false);
             return;
         }
 
-        dispatch(startUpdateItem({id, description, amount: Number(amount) }));
+        dispatch(startUpdateItem({ id, description, amount: Number(amount), category: selectedCategory }));
         dispatch(sheetClearActiveItem());
         reset();
     }
@@ -90,88 +94,107 @@ export const SheetItemModal = () => {
     }
 
     const handleDelete = () => {
-        dispatch(startDeleteItem({...activeItem, amount: Number(amount)}));
+        dispatch(startDeleteItem({ ...activeItem, amount: Number(amount) }));
         dispatch(sheetClearActiveItem());
+    }
+
+    const selectCategory = (e) => {
+        setSelectedCategory(e.target.value);
     }
 
 
 
     return (
         <Modal
-                className="modal"
-                overlayClassName="modal-fondo"
-                isOpen={ modalOpen }
-                closeTimeoutMS={ 200 }
-                onRequestClose={ handleCloseModal }
-                style={ customStyles }
-                contentLabel="Example Modal"
-            >
-                <h1>Edit</h1>
-                <hr/>
-                <form onSubmit={ handleSubmit }>
-                    <div className="row">
-                        <div className="col-8">
-                            {
-                                !type && (
-                                    <input 
-                                        type="text" 
-                                        className={`form-control input-new-entry ${ !descriptionValid && 'is-invalid'}`}
-                                        placeholder="description"
-                                        name="description"
-                                        value={ description }
-                                        onChange={ (e) => { handleInputChange(e); validateDescription(e); } }
-                                    />
-                                )
-                            }
-                            
-                        </div>
-                        <div className="col-4">
-                            <input 
-                                type="text" 
-                                className={`form-control input-new-entry ${ !amountValid && 'is-invalid'}`}
-                                placeholder="amount"
-                                name="amount"
-                                value={ amount }
-                                onChange={ (e) => { handleInputChange(e); validateAmount(e); } }
-                            />
-                            <div className="invalid-feedback">
-                                invalid amount
-                            </div>
-                        </div>
+            className="modal"
+            overlayClassName="modal-fondo"
+            isOpen={modalOpen}
+            closeTimeoutMS={200}
+            onRequestClose={handleCloseModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+        >
+            <h1>Edit</h1>
+            <hr />
+            <form onSubmit={handleSubmit}>
+                <div className="row">
+                    <div className="col">
+                        {
+                            !type && (
+                                <input
+                                    type="text"
+                                    className={`form-control input-new-entry ${!descriptionValid && 'is-invalid'}`}
+                                    placeholder="description"
+                                    name="description"
+                                    value={description}
+                                    onChange={(e) => { handleInputChange(e); validateDescription(e); }}
+                                />
+                            )
+                        }
 
-                        <div  className="btn-modal-actions">
-                           
-                            <div>
-                                <button 
-                                    type="button" 
-                                    className="btn btn-outline-danger btn-small"
-                                    onClick={ handleDelete }
-                                    disabled={ loading }
-                                >
-                                    delete
-                                </button>
-                            </div>
-                            <div>
-                                <button 
-                                    type="button" 
-                                    className="btn btn-secundary btn-small me-3"
-                                    onClick={ handleCloseModal }
-                                >
-                                    close
-                                </button>
-                                <button 
-                                    type="submit" 
-                                    className="btn btn-dark btn-small"
-                                    disabled={ loading }
-                                >
-                                    save
-                                </button>
-                            </div>
-                            
-                        </div>
-                      
                     </div>
-                </form>
-            </Modal>
+                    <div className="col-3">
+                        <input
+                            type="text"
+                            className={`form-control input-new-entry ${!amountValid && 'is-invalid'}`}
+                            placeholder="amount"
+                            name="amount"
+                            value={amount}
+                            onChange={(e) => { handleInputChange(e); validateAmount(e); }}
+                        />
+                        <div className="invalid-feedback">
+                            invalid amount
+                        </div>
+                    </div>
+
+                    <div className="col">
+                        <select className="form-select input-new-entry" value={selectedCategory} onChange={(e) => { selectCategory(e); }}>
+                            <option value={0}></option>
+
+                            {
+                                categories.map(x => (
+                                    <option key={x.id} value={x.id}>{x.name}</option>
+                                ))
+                            }
+                        </select>
+
+
+                    </div>
+
+
+
+                </div>
+                <div className="btn-modal-actions">
+
+                    <div>
+                        <button
+                            type="button"
+                            className="btn btn-outline-danger btn-small"
+                            onClick={handleDelete}
+                            disabled={loading}
+                        >
+                            delete
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            type="button"
+                            className="btn btn-secundary btn-small me-3"
+                            onClick={handleCloseModal}
+                        >
+                            close
+                        </button>
+                        <button
+                            type="submit"
+                            className="btn btn-dark btn-small"
+                            disabled={loading}
+                        >
+                            save
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </Modal>
     )
 }

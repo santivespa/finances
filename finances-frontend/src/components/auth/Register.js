@@ -65,7 +65,7 @@ export const Register = () => {
             />
 
             <Link 
-                to="/login"
+                to="/auth/login"
             >
                 Already have an account? login
             </Link>

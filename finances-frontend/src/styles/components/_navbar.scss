@@ -1,4 +1,3 @@
-
 .navbar__main-content {
     display: flex;
     padding: 16px;
@@ -9,8 +8,14 @@
     color: white;
     text-decoration: none;
     cursor: pointer;
-font-weight: 500;
+    font-weight: 500;
+    margin-right: 8px;
+
     &:hover {
         color: darken($color: white, $amount: 20);
     }
+}
+
+.me-0 {
+    margin-right: 0;
 }

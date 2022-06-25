@@ -20,6 +20,16 @@ const types = {
     sheetClearActive: '[sheet] Clear active sheet',
     sheetSetActive: '[sheet] Set active sheet',
 
+
+    categoryAdd: '[category] Add new category',
+    categoryUpdated: '[category] Update category',
+    categoryDeleted: '[category] Delete category',
+    categorySetCategories: '[category] Set categories',
+    categoryClearActive: '[category] Clear active category',
+    categorySetActive: '[category] Set active category',
+
+
+
     sheetSetItems: '[sheet] Set items',
     sheetAddItem: '[sheet] Add sheet item',
     sheetDeleteItem: '[sheet] Delete sheet item',
