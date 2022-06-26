@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     background-color: $bg-dark;
+    overflow-y: overlay;
     
 }
 
@@ -98,4 +99,33 @@ h1 {
         color: darken($color: white, $amount: 30);
         font-weight: 500;
     }
+}
+
+.border-gray {
+    border: 1px solid #DADCDF;
+}
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background:  rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background:  rgba(255, 255, 255, 0.8);
 }

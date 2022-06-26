@@ -46,3 +46,28 @@
       
 }
 
+.btn-accordion-items {
+    padding: 8px;
+    border-radius: 0px !important;
+}
+
+
+
+.btn-black-transparent {
+    background-color: rgba($color: black, $alpha: 0.1);
+    color: black;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 4px 8px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: rgba($color: black, $alpha: 0.2);
+        color: black;
+
+    }
+    span {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+}

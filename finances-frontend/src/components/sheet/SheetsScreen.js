@@ -6,6 +6,7 @@ import { calculateLastiRemainingAmount, setActiveSheet, startGetSheets } from '.
 import { openModal } from '../../actions/ui';
 import { NewSheetModal } from './NewSheetModal';
 import moment from 'moment';
+import { NavLink } from 'react-router-dom';
 
 export const SheetsScreen = () => {
 
@@ -21,6 +22,7 @@ export const SheetsScreen = () => {
     
     const setActiveItem = (sheet) => {
         dispatch(setActiveSheet(sheet));
+
     }
 
     const handleNewSheet = () => {
@@ -57,7 +59,7 @@ export const SheetsScreen = () => {
                             sheets.map(sheet => (
                                 <tr key={ sheet.id }>
                                     <td>
-                                        <button className="btn-fake-link" onClick={ (e) => setActiveItem(sheet) }>{ moment(sheet.date).format('MMMM') } { moment(sheet.date).format('YYYY')}</button>
+                                        <NavLink className="btn-fake-link" to="/sheet" onClick={ (e) => setActiveItem(sheet) }>{ moment(sheet.date).format('MMMM') } { moment(sheet.date).format('YYYY')}</NavLink>
                                     </td>
                                     <td className="text-end" >
                                         <span className="small">inicio </span> 

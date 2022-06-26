@@ -82,10 +82,11 @@ export const SheetItemModal = ({ categories }) => {
             setAmountValid(false);
             return;
         }
-
-        dispatch(startUpdateItem({ id, description, amount: Number(amount), category: selectedCategory }));
+     
+        const categoryID = selectedCategory !==0 ? selectedCategory : null;
+        dispatch(startUpdateItem({ id, description, amount: Number(amount), category: categoryID }, reset));
         dispatch(sheetClearActiveItem());
-        reset();
+     
     }
 
     const handleCloseModal = () => {
@@ -147,21 +148,22 @@ export const SheetItemModal = ({ categories }) => {
                         </div>
                     </div>
 
-                    <div className="col">
-                        <select className="form-select input-new-entry" value={selectedCategory} onChange={(e) => { selectCategory(e); }}>
-                            <option value={0}></option>
+                    {
+                        !type && 
+                        (
+                            <div className="col">
+                                <select className="form-select input-new-entry" value={selectedCategory} onChange={(e) => { selectCategory(e); }}>
+                                    <option value={0}></option>
 
-                            {
-                                categories.map(x => (
-                                    <option key={x.id} value={x.id}>{x.name}</option>
-                                ))
-                            }
-                        </select>
-
-
-                    </div>
-
-
+                                    {
+                                        categories.map(x => (
+                                            <option key={x.id} value={x.id}>{x.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                        )
+                    }
 
                 </div>
                 <div className="btn-modal-actions">

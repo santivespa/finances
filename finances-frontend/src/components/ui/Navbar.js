@@ -20,7 +20,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar__main-content  justify-content-between">
       <div>
-        <NavLink className="navbar__link" to="/home" onClick={clearActive}>Sheets</NavLink>
+        <NavLink className="navbar__link" to="/" onClick={clearActive}>Sheets</NavLink>
         <NavLink className="navbar__link" to="/categories">Categories</NavLink>
       </div>
       <a className="navbar__link me-0" onClick={handleLogout}>Logout</a>

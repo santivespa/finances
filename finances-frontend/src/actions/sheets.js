@@ -1,3 +1,4 @@
+import { resetState } from "react-modal/lib/helpers/ariaAppHider";
 import Swal from "sweetalert2";
 import { fetchWithToken } from "../helpers/fetch";
 import types from "../types/types";
@@ -131,9 +132,10 @@ const setSheetItems = (items) => ({
 export const startAddItem = (item, sheetID, categoryID) => {
     return async (dispatch) => {
         dispatch(startLoading());
-        console.log(`Adding item with categoryID: ${categoryID}`);
+
         const res = await fetchWithToken(`sheet-item/add?sheetID=${sheetID}&categoryID=${categoryID}`, item, 'POST');
         const body = await res.json();
+ 
         if(body.ok) {
             dispatch(addItem(body.item));
         }else{
@@ -153,7 +155,7 @@ const addItem = (item) => ({
     payload: item
 });
 
-export const startUpdateItem = (item) => {
+export const startUpdateItem = (item, reset) => {
     return async (dispatch) => {
         dispatch(startLoading());
 
@@ -162,6 +164,7 @@ export const startUpdateItem = (item) => {
         if(body.ok) {
             dispatch(updateItem(body.item));
             dispatch(closeModal());
+            reset();
         }else{
             Swal.fire(
                 'Error',

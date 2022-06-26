@@ -17,9 +17,8 @@ export const FinancesRouter = () => {
                             <Navbar />
 
                             <Routes>
-                                <Route path="/home" exact element={<FinanceScreen />} />
+                                <Route path="/*" element={<FinanceScreen />} />
                                 <Route path="/categories" exact element={<CategoriesScreen />} />
-                                <Route path="/" element={<FinanceScreen />} />
                             </Routes>
 
 
