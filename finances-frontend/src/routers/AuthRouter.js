@@ -1,12 +1,16 @@
 
 
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Login } from "../components/auth/Login";
 import { Register } from '../components/auth/Register';
 
+
 export const AuthRouter = () => {
+
+  const VERSION = process.env.REACT_APP_VERSION;
+
   return (
     <div className="auth__main-container row mp-0 justify-content-center">
       <div className="auth__container col-10 col-md-5 col-lg-3">
@@ -19,7 +23,7 @@ export const AuthRouter = () => {
 
       <div className="text-center col-10 col-md-5 col-lg-4">
           <p className="m-0 mt-2 white-text">
-              2.0.0    
+              { VERSION }   
           </p>
 
           <p className="m-0 mt-2 white-text">

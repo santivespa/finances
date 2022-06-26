@@ -50,11 +50,10 @@ export const GroupItems = () => {
 
     return (
         <>
-            <div className="d-flex m-2">
+            <div className="d-flex mt-2 mb-2">
 
                 <NavLink to="/sheet" className="btn-black-transparent">
                     <i className="fa-solid fa-circle-arrow-left"></i>
-                    
                     <span>back</span>
                 </NavLink>
             </div>
