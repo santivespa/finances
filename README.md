@@ -1,1 +1,3 @@
 # finances
+
+readme coming soon.
